@@ -1,0 +1,37 @@
+﻿[
+  {
+    "createdAt": 1691432670,
+    "name": "Movie 1",
+    "synopsis": "This is the first movie.",
+    "release_date": 1691432728,
+    "id": "1"
+  },
+  {
+    "createdAt": 1691432617,
+    "name": "Movie 2",
+    "synopsis": "This is the second movie.",
+    "release_date": 1691432736,
+    "id": "2"
+  },
+  {
+    "createdAt": 1691432586,
+    "name": "Movie 3",
+    "synopsis": "This is the third movie.",
+    "release_date": 1691432765,
+    "id": "3"
+  },
+  {
+    "createdAt": 1691432533,
+    "name": "Movie 4",
+    "synopsis": "This is the forth movie.",
+    "release_date": 1691432771,
+    "id": "4"
+  },
+  {
+    "createdAt": 1691432477,
+    "name": "Movie 5",
+    "synopsis": "This is the fifth movie.",
+    "release_date": 1691432775,
+    "id": "5"
+  }
+]
