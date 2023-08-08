@@ -1,5 +1,6 @@
 ﻿@page "/movies"
 @inject HttpClient Http
+@using System.Text.Json.Serialization;
 
 <link href="/css/Movie.css" rel="stylesheet" />
 
@@ -25,32 +26,51 @@
                     <div class="data-title">
                         <h2>@film.Name</h2>
                     </div>
-                    <div class="data-synopsis">
+                    <div class="data-info">
                         <p>@film.Synopsis</p>
+                        <p>Release Date: @ConvertUnixTimestampToDate(@film.ReleaseDate)</p>
                     </div>
                 </div>
             </li>
-            }
         }
-    </div>
-</ul>
-
-@code {
-    // Create field that is an array of film objects
-    private Film[]? films;
-
-    // Gets the data from the json file based on the API. Converts to array of film objects which we can then iterate over and display. 
-    protected override async Task OnInitializedAsync()
-    {
-        films = await Http.GetFromJsonAsync<Film[]>("sample-data/movie.json");
     }
+        </div>
+    </ul>
 
-    // Public film class with the fields Name and Synopsis that are both string types. 
-    public class Film
-    {
-        public string? Name { get; set; }
-        public string? Synopsis { get; set; }
+    @code {
+        // Create field that is an array of film objects
+        private Film[]? films;
+
+        // Gets the data from the json file based on the API. Converts to array of film objects which we can then iterate over and display.
+        protected override async Task OnInitializedAsync()
+        {
+            films = await Http.GetFromJsonAsync<Film[]>("sample-data/movie.json");
+        }
+
+        // Public film class with the fields Name and Synopsis that are both string types.
+        // add the JSON property name to make sure that it grabs the correct value.
+        public class Film
+        {
+            [JsonPropertyName("name")]
+            public string? Name { get; set; }
+
+            [JsonPropertyName("synopsis")]
+            public string? Synopsis { get; set; }
+
+            [JsonPropertyName("release_date")]
+            public int? ReleaseDate { get; set; }
+        }
+
+        // Convert the annoying timestamp to a readable date format
+        private string ConvertUnixTimestampToDate(long? unixTimestamp)
+        {
+            if (unixTimestamp.HasValue)
+            {
+                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(unixTimestamp.Value);
+                return dateTimeOffset.ToString("yyyy-MM-dd"); // Just return the date part
+            }
+            return "Unknown date";
+        }
+
     }
-
-}
 
