@@ -1,0 +1,24 @@
+﻿body {
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+
+.nav-container {
+    display: flex;
+    height: 100px;
+    justify-content: space-between;
+    padding: 5px 20px;
+    align-items: center;
+    border-bottom: 1px solid black;
+    margin: 0px 10px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
