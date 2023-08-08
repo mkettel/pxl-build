@@ -8,28 +8,32 @@
     <p>Some of the latest and greatest movies out there folks</p>
 </div>
 
-<div class="film-container">
-    @foreach (var film in films)
-    {
-        if (film == null)
+<ul>
+    <div class="film-container">
+        @foreach (var film in films)
         {
+            if (film == null)
+            {
                 <div class="loader">
                     <h2>Loading...</h2>
                 </div>
-        }
-        else
-        {
-            <div class="data-container">
-                <div class="data-title">
-                    <h2>@film.Name</h2>
+            }
+            else
+            {
+            <li>
+                <div class="data-container">
+                    <div class="data-title">
+                        <h2>@film.Name</h2>
+                    </div>
+                    <div class="data-synopsis">
+                        <p>@film.Synopsis</p>
+                    </div>
                 </div>
-                <div class="data-synopsis">
-                    <p>@film.Synopsis</p>
-                </div>
-            </div>
+            </li>
+            }
         }
-    }
-</div>
+    </div>
+</ul>
 
 @code {
     // Create field that is an array of film objects
