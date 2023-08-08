@@ -1,0 +1,59 @@
+﻿@page "/add-movie"
+@inject HttpClient Http
+@inject NavigationManager NavManager
+
+
+<h3>Add Your Movie</h3>
+
+<div class="add-movie-form">
+    <h2>Add New Movie</h2>
+    <EditForm Model="newFilm" OnValidSubmit="AddFilm">
+        <DataAnnotationsValidator />
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <InputText id="name" @bind-Value="newFilm.Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="synopsis">Synopsis:</label>
+            <InputTextArea id="synopsis" @bind-Value="newFilm.Synopsis" class="form-control" rows="5"></InputTextArea>
+        </div>
+        <button type="submit" class="btn btn-success">Add Movie</button>
+    </EditForm>
+</div>
+
+@code {
+
+    private Film[]? films;
+    private Film newFilm = new Film();
+
+    protected override async Task OnInitializedAsync()
+    {
+        films = await Http.GetFromJsonAsync<Film[]>("sample-data/movie.json");
+    }
+
+    private void AddFilm()
+    {
+        // Here you would typically make a call to your API to save the new movie.
+        // As an example, we'll add the new movie to the local list.
+        // Note: In a real-world scenario, you would want to persist this data to a server or database.
+
+        var filmList = films?.ToList() ?? new List<Film>();
+        filmList.Add(newFilm);
+        films = filmList.ToArray();
+
+        newFilm = new Film(); // Reset the form model for new entries.
+        NavManager.NavigateTo("/movie");
+
+    }
+
+    public class Film
+    {
+
+        public string? Name { get; set; }
+
+
+        public string? Synopsis { get; set; }
+    }
+
+}
+

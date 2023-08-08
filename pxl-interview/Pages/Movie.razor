@@ -36,15 +36,24 @@
     }
         </div>
     </ul>
+    <a href="/add-movie" class="btn btn-primary">Add New Movie</a>
+
 
     @code {
         // Create field that is an array of film objects
-        private Film[]? films;
+        private Film[] films = new Film[0];
 
         // Gets the data from the json file based on the API. Converts to array of film objects which we can then iterate over and display.
         protected override async Task OnInitializedAsync()
         {
-            films = await Http.GetFromJsonAsync<Film[]>("sample-data/movie.json");
+            try
+            {
+                films = await Http.GetFromJsonAsync<Film[]>("sample-data/movie.json");
+            }
+            catch
+            {
+                Console.WriteLine($"Error loading movies:");
+            }
         }
 
         // Public film class with the fields Name and Synopsis that are both string types.
