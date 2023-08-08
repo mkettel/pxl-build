@@ -63,3 +63,10 @@ h1:focus {
     .main-button a {
         color: #caf0f8;
     }
+
+/* Image container that doesn't work right now. */
+.image-container {
+    height: 300px;
+    width: 300px;
+    background-image: url(/images/santa-monica.png);
+}

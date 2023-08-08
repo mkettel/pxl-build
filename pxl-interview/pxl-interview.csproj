@@ -21,6 +21,7 @@
     <None Remove="Shared\" />
     <None Remove="New Folder\" />
     <None Remove="images\" />
+    <None Remove="images\santa-monica.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Shared\" />
@@ -30,5 +31,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\sample-data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="images\santa-monica.png" />
   </ItemGroup>
 </Project>
