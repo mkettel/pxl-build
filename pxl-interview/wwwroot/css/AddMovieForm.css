@@ -1,0 +1,23 @@
+﻿body {
+}
+
+.add-movie-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    padding: 10px 0px;
+}
+.form-group label {
+    margin-right: 10px;
+}
+
+.form-control {
+    width: 300px;
+    border-radius: 5px;
+}

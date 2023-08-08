@@ -1,0 +1,61 @@
+﻿@page "/add-movie"
+@inject HttpClient Http
+@inject NavigationManager NavManager
+@using System.ComponentModel.DataAnnotations;
+
+<link href="/css/AddMovieForm.css" rel="stylesheet" />
+
+
+<div class="add-movie-form">
+    <h1>Add New Movie</h1>
+    <EditForm Model="newFilm" OnValidSubmit="AddFilm">
+        <DataAnnotationsValidator />
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <InputText id="name" @bind-Value="newFilm.Name" class="form-control" />
+
+        </div>
+        <div class="form-group">
+            <label for="synopsis">Synopsis:</label>
+            <InputTextArea id="synopsis" @bind-Value="newFilm.Synopsis" class="form-control" rows="5"></InputTextArea>
+        </div>
+        <button type="submit" class="btn btn-success">Add Movie</button>
+    </EditForm>
+</div>
+
+@code {
+
+    private Film[]? films;
+    private Film newFilm = new Film();
+
+    protected override async Task OnInitializedAsync()
+    {
+        films = await Http.GetFromJsonAsync<Film[]>("sample-data/movie.json");
+    }
+
+    private void AddFilm()
+    {
+
+        // adding the movie to the list? having trouble saving due to it being a json file
+        var filmList = films?.ToList() ?? new List<Film>();
+        filmList.Add(newFilm);
+        films = filmList.ToArray();
+
+        newFilm = new Film(); // Reset the form model for new entries.
+        NavManager.NavigateTo("/movies");
+        Console.WriteLine(films); // -> outputs: pxl_interview.Pages.AddMovieForm+Film
+
+    }
+
+    public class Film
+    {
+        [Required(ErrorMessage = "Movie name is required.")]
+        [StringLength(100, ErrorMessage = "Movie name cannot be longer than 100 characters.")]
+        public string? Name { get; set; }
+
+
+        public string? Synopsis { get; set; }
+    }
+
+}
+

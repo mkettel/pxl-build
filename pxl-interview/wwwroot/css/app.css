@@ -1,5 +1,6 @@
 ﻿body {
     background-color: #caf0f8;
+    padding-bottom: 20px;
 }
 main {
     max-width: 1200px;
@@ -13,6 +14,9 @@ main {
     align-items: center;
     height: 100vh;
     width: 100%;
+}
+.loader p {
+    font-size: 22px;
 }
 
 h1:focus {
@@ -48,3 +52,21 @@ h1:focus {
         content: "An error has occurred."
     }
 
+
+/* Main button styling */
+.main-button {
+    padding: 10px 15px;
+    background-color: #0077b6;
+    color: #caf0f8;
+    border-radius: 5px;
+}
+    .main-button a {
+        color: #caf0f8;
+    }
+
+/* Image container that doesn't work right now. */
+.image-container {
+    height: 300px;
+    width: 300px;
+    background-image: url(/images/santa-monica.png);
+}
