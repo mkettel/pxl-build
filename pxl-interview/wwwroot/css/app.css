@@ -1,5 +1,6 @@
 ﻿body {
     background-color: #caf0f8;
+    padding-bottom: 20px;
 }
 main {
     max-width: 1200px;
@@ -48,3 +49,14 @@ h1:focus {
         content: "An error has occurred."
     }
 
+
+/* Main button styling */
+.main-button {
+    padding: 10px 15px;
+    background-color: #0077b6;
+    color: #caf0f8;
+    border-radius: 5px;
+}
+    .main-button a {
+        color: #caf0f8;
+    }

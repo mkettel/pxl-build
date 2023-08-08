@@ -2,11 +2,11 @@
 @inject HttpClient Http
 @inject NavigationManager NavManager
 
+<link href="/css/AddMovieForm.css" rel="stylesheet" />
 
-<h3>Add Your Movie</h3>
 
 <div class="add-movie-form">
-    <h2>Add New Movie</h2>
+    <h1>Add New Movie</h1>
     <EditForm Model="newFilm" OnValidSubmit="AddFilm">
         <DataAnnotationsValidator />
         <div class="form-group">
@@ -33,16 +33,14 @@
 
     private void AddFilm()
     {
-        // Here you would typically make a call to your API to save the new movie.
-        // As an example, we'll add the new movie to the local list.
-        // Note: In a real-world scenario, you would want to persist this data to a server or database.
 
+        // adding the movie to the list? having trouble saving due to it being a json file
         var filmList = films?.ToList() ?? new List<Film>();
         filmList.Add(newFilm);
         films = filmList.ToArray();
 
         newFilm = new Film(); // Reset the form model for new entries.
-        NavManager.NavigateTo("/movie");
+        NavManager.NavigateTo("/movies");
 
     }
 
