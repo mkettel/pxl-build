@@ -2,7 +2,11 @@
 
 @page "/projects"
 
-<h3>Projects</h3>
+<link href="/css/Project.css" rel="stylesheet" />
+
+<div class="header">
+    <h1>Projects</h1>
+</div>
 
 <div class="project-container">
     @if (projects != null)
@@ -10,7 +14,8 @@
             @foreach (var project in projects)
 {
                     <div class="project-item">
-                        <h4>@project.Title</h4>
+                        <h3>@project.Title</h3>
+                        <p>@project.Description</p>
                     </div>
 }
 }
@@ -18,6 +23,7 @@
 </div>
 
 @code {
+
     private ProjectItem[]? projects;
 
     protected override void OnInitialized()
@@ -26,6 +32,10 @@
         {
                 new ProjectItem { Title = "Personal Portfolio", Description = "2D and 3D Personal Portfolio for all of my most recent projects" },
                 new ProjectItem { Title = "SurfShop", Description = "A fun 3D Surfboard Configurator" },
+                new ProjectItem { Title = "Jolt", Description = "Educational chrome extension of short-form videos for students." },
+                new ProjectItem { Title = "Homebase", Description = "Knowledge base website for house sitters to use to keep the house in tip top shape while the client is away." },
+                new ProjectItem { Title = "3D Resume", Description = "A fun new way to display a resume during the job hunt" },
+                new ProjectItem { Title = "GrassRoots", Description = "A back-to-your-roots application to get in touch with your favorite artists through your spotify listening history." },
         };
         //base.OnInitialized();
     }
