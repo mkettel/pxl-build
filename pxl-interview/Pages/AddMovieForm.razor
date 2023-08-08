@@ -1,6 +1,7 @@
 ﻿@page "/add-movie"
 @inject HttpClient Http
 @inject NavigationManager NavManager
+@using System.ComponentModel.DataAnnotations;
 
 <link href="/css/AddMovieForm.css" rel="stylesheet" />
 
@@ -12,6 +13,7 @@
         <div class="form-group">
             <label for="name">Name:</label>
             <InputText id="name" @bind-Value="newFilm.Name" class="form-control" />
+
         </div>
         <div class="form-group">
             <label for="synopsis">Synopsis:</label>
@@ -41,12 +43,14 @@
 
         newFilm = new Film(); // Reset the form model for new entries.
         NavManager.NavigateTo("/movies");
+        Console.WriteLine(films); // -> outputs: pxl_interview.Pages.AddMovieForm+Film
 
     }
 
     public class Film
     {
-
+        [Required(ErrorMessage = "Movie name is required.")]
+        [StringLength(100, ErrorMessage = "Movie name cannot be longer than 100 characters.")]
         public string? Name { get; set; }
 
 
