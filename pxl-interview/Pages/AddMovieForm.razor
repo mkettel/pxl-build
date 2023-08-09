@@ -22,6 +22,7 @@
         <button type="submit" class="btn btn-success">Add Movie</button>
     </EditForm>
 </div>
+@*gets the name field and synopsis adds it to newFilm to creat a Film. OnSubmit it calls the AddFilm Method.*@
 
 @code {
     // creates a new array of Film objects
@@ -34,7 +35,7 @@
         films = await Http.GetFromJsonAsync<Film[]>("https://64cd647fbb31a268409aa8a6.mockapi.io/api/movies");
     }
 
-    // Method to make post request to add the film to the api endpoint. 
+    // Method to make post request to add the film to the api endpoint.
     private async Task AddFilm()
     {
         try
