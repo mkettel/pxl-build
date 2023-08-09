@@ -2,6 +2,7 @@
 
 @page "/projects"
 
+@*Linking correct stylesheet*@
 <link href="/css/Project.css" rel="stylesheet" />
 
 <div class="header">
@@ -9,6 +10,7 @@
 </div>
 
 <div class="project-container">
+@*check to make sure projects is NOT null and display the project and its details using for loop*@
     @if (projects != null)
 {
             @foreach (var project in projects)
@@ -19,6 +21,10 @@
                     </div>
 }
 }
+    else
+{
+            <h2>No projects to show</h2>
+}
 
 </div>
 
@@ -26,20 +32,30 @@
 
     private ProjectItem[]? projects;
 
+    // when initialized, populate the projects array with the sample projects below
     protected override void OnInitialized()
     {
-        projects = new ProjectItem[]
+        try
         {
+            projects = new ProjectItem[]
+            {
                 new ProjectItem { Title = "Personal Portfolio", Description = "2D and 3D Personal Portfolio for all of my most recent projects" },
                 new ProjectItem { Title = "SurfShop", Description = "A fun 3D Surfboard Configurator" },
                 new ProjectItem { Title = "Jolt", Description = "Educational chrome extension of short-form videos for students." },
                 new ProjectItem { Title = "Homebase", Description = "Knowledge base website for house sitters to use to keep the house in tip top shape while the client is away." },
                 new ProjectItem { Title = "3D Resume", Description = "A fun new way to display a resume during the job hunt" },
                 new ProjectItem { Title = "GrassRoots", Description = "A back-to-your-roots application to get in touch with your favorite artists through your spotify listening history." },
-        };
+            };
+        }
+        // error Handling for project component to display message if there is an issue loading
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error with projects {ex.Message}");
+        }
+
         //base.OnInitialized();
     }
-
+    // Class representing a project item with fields of Title and Description. 
     public class ProjectItem
     {
         public string? Title { get; set; }

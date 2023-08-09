@@ -65,8 +65,7 @@ h1:focus {
     }
 
 /* Image container that doesn't work right now. */
-.image-container {
+.image-container img{
     height: 300px;
     width: 300px;
-    background-image: url(/images/santa-monica.png);
 }
