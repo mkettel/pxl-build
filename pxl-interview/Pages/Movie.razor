@@ -4,11 +4,13 @@
 
 <link href="/css/Movie.css" rel="stylesheet" />
 
+@*header tag*@
 <div class="header">
     <h1>Movies</h1>
     <p>Some of the latest and greatest movies out there folks</p>
 </div>
 
+@*unordered list displaying the films and their data*@
 <ul>
     <div class="film-container">
         @foreach (var film in films)
@@ -34,11 +36,12 @@
             </li>
         }
     }
-        </div>
+     </div>
     </ul>
 
+    
     <a href="/add-movie" class="main-button">Add New Movie</a>
-
+    
 
     @code {
         // Create field that is an array of film objects
@@ -49,7 +52,7 @@
         {
             try
             {
-                films = await Http.GetFromJsonAsync<Film[]>("sample-data/movie.json");
+                films = await Http.GetFromJsonAsync<Film[]>("https://64cd647fbb31a268409aa8a6.mockapi.io/api/movies");
             }
             catch
             {
