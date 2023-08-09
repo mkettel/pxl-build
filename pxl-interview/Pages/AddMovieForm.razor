@@ -24,27 +24,39 @@
 </div>
 
 @code {
-
+    // creates a new array of Film objects
     private Film[]? films;
     private Film newFilm = new Film();
 
+    // Gets the data from the API Endpoint
     protected override async Task OnInitializedAsync()
     {
-        films = await Http.GetFromJsonAsync<Film[]>("sample-data/movie.json");
+        films = await Http.GetFromJsonAsync<Film[]>("https://64cd647fbb31a268409aa8a6.mockapi.io/api/movies");
     }
 
-    private void AddFilm()
+    // Method to make post request to add the film to the api endpoint. 
+    private async Task AddFilm()
     {
+        try
+        {
+            var response = await Http.PostAsJsonAsync("https://64cd647fbb31a268409aa8a6.mockapi.io/api/movies", newFilm);
 
-        // adding the movie to the list? having trouble saving due to it being a json file
-        var filmList = films?.ToList() ?? new List<Film>();
-        filmList.Add(newFilm);
-        films = filmList.ToArray();
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Film added.");
+                NavManager.NavigateTo("/movies", forceLoad: true);  // Force reload so list is shown againk
+            }
+            else
+            {
+                Console.WriteLine($"Error adding film: {response.ReasonPhrase}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error adding film: {ex.Message}");
+        }
 
-        newFilm = new Film(); // Reset the form model for new entries.
-        NavManager.NavigateTo("/movies");
-        Console.WriteLine(films); // -> outputs: pxl_interview.Pages.AddMovieForm+Film
-
+        newFilm = new Film(); // Reset the form model for new film addirion.
     }
 
     public class Film
